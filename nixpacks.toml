@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["jdk"]
+nixPkgs = ["openjdk"]
 
 [start]
 cmd = "java Main"
