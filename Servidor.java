@@ -14,24 +14,37 @@ public class Servidor {
 
         servidor.createContext("/", troca -> {
 
-            visitas++;
+    if (troca.getRequestURI().getPath().equals("/")) {
+        visitas++;
+    }
 
-            String html = Files.readString(Path.of("index.html"));
+    String html = Files.readString(Path.of("index.html"));
 
-            html = html.replace("<!-- VISITAS -->", "Visitas: " + visitas);
-            html = html.replace("<!-- HORA -->", "Hora: " + java.time.LocalTime.now());
+    html = html.replace("<!-- VISITAS -->", "Visitas: " + visitas);
+    html = html.replace("<!-- HORA -->", "Hora: " + java.time.LocalTime.now());
 
-            troca.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
+    troca.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
 
-            byte[] resposta = html.getBytes("UTF-8");
+    byte[] resposta = html.getBytes("UTF-8");
 
-            troca.sendResponseHeaders(200, resposta.length);
+    troca.sendResponseHeaders(200, resposta.length);
 
-            troca.getResponseBody().write(resposta);
+    troca.getResponseBody().write(resposta);
 
-            troca.close();
-        });
+    troca.close();
+});
+servidor.createContext("/style.css", troca -> {
 
+    byte[] resposta = Files.readAllBytes(Path.of("style.css"));
+
+    troca.getResponseHeaders().set("Content-Type", "text/css");
+
+    troca.sendResponseHeaders(200, resposta.length);
+
+    troca.getResponseBody().write(resposta);
+
+    troca.close();
+});
         servidor.start();
 
         System.out.println("Servidor rodando na porta 8080");
