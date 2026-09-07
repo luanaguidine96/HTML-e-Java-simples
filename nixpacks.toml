@@ -1,8 +1,5 @@
 [phases.setup]
 nixPkgs = ["jdk"]
 
-[phases.build]
-cmds = ["javac Main.java Servidor.java"]
-
 [start]
 cmd = "java Main"
