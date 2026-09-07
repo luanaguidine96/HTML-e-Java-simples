@@ -1,5 +1,7 @@
-[phases.setup]
-nixPkgs = ["jdk21"]
+providers = ["java"]
+
+[variables]
+NIXPACKS_JDK_VERSION = "21"
 
 [phases.build]
 cmds = ["javac Main.java Servidor.java"]
