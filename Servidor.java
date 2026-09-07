@@ -10,7 +10,9 @@ public class Servidor {
 
     public void iniciar() throws Exception {
 
-        HttpServer servidor = HttpServer.create(new InetSocketAddress(8080), 0);
+      int porta = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
+
+HttpServer servidor = HttpServer.create(new InetSocketAddress(porta), 0);
 
         servidor.createContext("/", troca -> {
 
