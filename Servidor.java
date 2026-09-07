@@ -12,7 +12,7 @@ public class Servidor {
 
         int porta = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
 
-        HttpServer servidor = HttpServer.create(new InetSocketAddress(porta), 0);
+HttpServer servidor = HttpServer.create(new InetSocketAddress("0.0.0.0", porta), 0);
 
         servidor.createContext("/", troca -> {
 
